@@ -15,3 +15,9 @@ entity Employees {
         department    : String;
         travelRequest : String;
 }
+
+
+entity Departments {
+    key code : String;
+        desc : String;
+}
