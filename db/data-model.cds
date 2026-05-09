@@ -19,5 +19,7 @@ entity Employees {
 
 entity Departments {
     key code : String;
+        name : String;
         desc : String;
+        id   : String;
 }
