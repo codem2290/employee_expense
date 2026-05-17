@@ -1,0 +1,4 @@
+statusCode,statusName
+PENDING, Pending
+APPROVED, Approved
+REJETED, Rejected

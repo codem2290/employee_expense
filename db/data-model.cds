@@ -18,8 +18,8 @@ entity Employees : cuid, managed {
     joiningDate   : Date;
     manager       : String;
     department    : Association to Departments; // Managed association
-    departmentNav : Association to Departments
-                        on department.code = department_ID; // unmanaged association
+    // departmentNav : Association to Departments
+    //                     on department.code = department_ID; // unmanaged association
     department_ID : String; // unmanaged association
     travelRequest : Association to many TravelRequests
                         on travelRequest.employee = $self;

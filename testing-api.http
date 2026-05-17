@@ -1,0 +1,41 @@
+### Reading Department Data
+GET http://localhost:4004/odata/v4/employee-expense/Departments
+
+
+### Creating Department Data
+POST http://localhost:4004/odata/v4/employee-expense/Departments
+Content-Type: application/json
+
+{
+    "code": "D001",
+    "name": "Sales"
+}
+
+### Creating TravelRequests data
+POST http://localhost:4004/odata/v4/employee-expense/TravelRequests
+Content-Type: application/json
+
+{
+    "requestNo": "TR001",
+    "purpose": "Business trip to New York",
+    "startDate": "2024-07-01",
+    "endDate": "2024-07-05",
+    "employee_ID": "E001",
+    "country_countryCode": "US",
+    "advanceAmount": 1000,
+    "status_travelStatusCode": "SUBMITTED",
+    "expenses": [
+        {
+            "expenseType_expenseType": "FLIGHT",
+            "amount": 500,            
+            "expenseDate": "2024-07-01",
+            "remarks": "Flight ticket to New York"
+        },
+        {
+            "expenseType_expenseType": "HOTEL",
+            "amount": 300,            
+            "expenseDate": "2024-07-02",
+            "remarks": "Hotel accommodation in New York"
+        }
+    ]
+}

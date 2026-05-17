@@ -1,0 +1,6 @@
+travelStatusCode,travelStatusName
+DRAFT, Draft
+SUBMITTED, Submitted
+MANAGER_APPROVED,Manager Approved
+REJECTED, Rejected
+COMPLETED, Completed
