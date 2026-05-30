@@ -1,6 +1,6 @@
-travelStatusCode,travelStatusName
-DRAFT, Draft
-SUBMITTED, Submitted
-MANAGER_APPROVED,Manager Approved
-REJECTED, Rejected
-COMPLETED, Completed
+travelStatusCode,travelStatusName,colorCode
+DRAFT, Draft, 0
+SUBMITTED, Submitted, 2
+MANAGER_APPROVED,Manager Approved, 3
+REJECTED, Rejected, 1
+COMPLETED, Completed, 3

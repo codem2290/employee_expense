@@ -106,7 +106,8 @@ entity ExpenseType {
 
 entity TravelStatus {
     key travelStatusCode : String;
-        travelStatusName : String
+        travelStatusName : String;
+        colorCode        : Integer;
 }
 
 entity ApprovalStatus {

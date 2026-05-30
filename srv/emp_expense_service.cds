@@ -1,5 +1,5 @@
 using {travel.management as dbTables} from '../db/data-model';
-
+@impl: ''
 service EmployeeExpenseService {
     entity Departments    as projection on dbTables.Departments;
     entity Countries      as projection on dbTables.Countries;
@@ -8,9 +8,17 @@ service EmployeeExpenseService {
     entity ExpenseType    as projection on dbTables.ExpenseType;
     entity Employees      as projection on dbTables.Employees;
     entity Roles          as projection on dbTables.Roles;
-    entity TravelRequests as projection on dbTables.TravelRequests;
+    @odata.draft.enabled
+    entity TravelRequests as projection on dbTables.TravelRequests actions {
+        //Bound Action
+        action rejectTravelRequest(requestId: UUID) returns String;
+    };
     entity Expenses       as projection on dbTables.Expenses;
     entity Approvals      as projection on dbTables.Approvals;
     entity Attachments    as projection on dbTables.Attachments;
     entity ApprovalStatus as projection on dbTables.ApprovalStatus;
+
+    //unbound action
+    action approveTravelRequest(requestId: UUID) returns String;
+    // action rejectTravelRequest(requestId: UUID) returns String;
 }
