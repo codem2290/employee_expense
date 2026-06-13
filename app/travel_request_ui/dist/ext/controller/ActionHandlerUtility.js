@@ -1,0 +1,2 @@
+sap.ui.define(["sap/m/MessageToast"],function(e){"use strict";return{approveTravelRequest:function(t,s){const n=t.getObject().ID;const o="approveTravelRequest";let a={model:t.getModel(),parameterValues:[{name:"requestId",value:n}],skipParameterDialog:true};this.getEditFlow().invokeAction(o,a).then(function(t){this._controller.getExtensionAPI().refresh();e.show("Request approved successfully.")}.bind(this)).catch(function(e){})}}});
+//# sourceMappingURL=ActionHandlerUtility.js.map

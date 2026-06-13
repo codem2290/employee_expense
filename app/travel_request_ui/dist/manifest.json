@@ -1,0 +1,193 @@
+{
+	"_version": "1.84.0",
+	"sap.app": {
+		"id": "com.travel.request.travelrequestui",
+		"type": "application",
+		"i18n": {
+			"bundleUrl": "i18n/i18n.properties",
+			"supportedLocales": [
+				""
+			]
+		},
+		"applicationVersion": {
+			"version": "0.0.1"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"sourceTemplate": {
+			"id": "@sap/generator-fiori:lrop",
+			"version": "1.24.0",
+			"toolsId": "92078ae7-02c3-4524-a471-1508e1155ada"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/odata/v4/employee-expense/",
+				"type": "OData",
+				"settings": {
+					"annotations": [],
+					"odataVersion": "4.0"
+				}
+			}
+		},
+		"crossNavigation": {
+			"inbounds": {
+				"travel_request_ui-display": {
+					"semanticObject": "travel_request_ui",
+					"action": "display",
+					"title": "Travel Request App",
+					"signature": {
+						"parameters": {},
+						"additionalParameters": "allowed"
+					}
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": true,
+		"dependencies": {
+			"minUI5Version": "1.148.0",
+			"libs": {
+				"sap.m": {},
+				"sap.ui.core": {},
+				"sap.fe.templates": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "com.travel.request.travelrequestui.i18n.i18n",
+					"supportedLocales": [
+						""
+					]
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"operationMode": "Server",
+					"autoExpandSelect": true,
+					"earlyRequests": true
+				}
+			},
+			"@i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties",
+				"settings": {
+					"supportedLocales": [
+						""
+					]
+				}
+			}
+		},
+		"resources": {
+			"css": []
+		},
+		"routing": {
+			"config": {},
+			"routes": [
+				{
+					"pattern": ":?query:",
+					"name": "TravelRequestsList",
+					"target": "TravelRequestsList"
+				},
+				{
+					"pattern": "TravelRequests({key}):?query:",
+					"name": "TravelRequestsObjectPage",
+					"target": "TravelRequestsObjectPage"
+				}
+			],
+			"targets": {
+				"TravelRequestsList": {
+					"type": "Component",
+					"id": "TravelRequestsList",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"contextPath": "/TravelRequests",
+							"variantManagement": "Page",
+							"navigation": {
+								"TravelRequests": {
+									"detail": {
+										"route": "TravelRequestsObjectPage"
+									}
+								}
+							},
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "GridTable"
+									}
+								}
+							}
+						}
+					}
+				},
+				"TravelRequestsObjectPage": {
+					"type": "Component",
+					"id": "TravelRequestsObjectPage",
+					"name": "sap.fe.templates.ObjectPage",
+					"options": {
+						"settings": {
+							"editableHeaderContent": false,
+							"contextPath": "/TravelRequests",
+							"content": {
+								"header": {
+									"actions": {
+										"approveBtn": {
+											"press": "com.travel.request.travelrequestui.ext.controller.ActionHandlerUtility.approveTravelRequest",
+											"visible": true,
+											"enabled": true,
+											"text": "{i18n>approve}",
+											"position": {
+												"placement": "Before",
+												"anchor": "EditAction"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"flexBundle": false
+	},
+	"sap.fiori": {
+		"registrationIds": [],
+		"archeType": "transactional"
+	},
+	"sap.fe": {
+		"app": {
+			"enableLazyLoading": true
+		}
+	},
+	"sap.cloud": {
+		"public": true,
+		"service": "employee_expense.service"
+	}
+}

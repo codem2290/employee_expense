@@ -57,6 +57,7 @@ entity Expenses : cuid, managed {
     expenseDate   : Date;
     amount        : Decimal(10, 2);
     remarks       : String(500);
+    total         : Decimal(10, 2);
     attachments   : Composition of many Attachments
                         on attachments.expense = $self;
 }

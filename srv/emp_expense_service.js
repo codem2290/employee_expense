@@ -4,7 +4,7 @@ const { SELECT } = require('@sap/cds/lib/ql/cds-ql');
 class EmployeeExpenseService extends cds.ApplicationService {
     init() {
 
-        const { TravelRequests } = this.entities;
+        const { TravelRequests, Expenses } = this.entities;
         this.before("UPDATE", TravelRequests.drafts, async (req) => {
             debugger;
             const { advanceAmount } = req.data;
@@ -24,6 +24,23 @@ class EmployeeExpenseService extends cds.ApplicationService {
 
         });
 
+        this.before("CREATE", Expenses.drafts, async (req) => {
+            let { travelRequest_ID } = req.data;
+            let oTravelRequestData = await SELECT.one.from(TravelRequests.drafts).where({ ID: travelRequest_ID });
+            req.data.total = oTravelRequestData.advanceAmount;
+            return req.data;
+        });
+
+        this.before("UPDATE", Expenses.drafts, async (req) => {
+            let { amount, ID } = req.data;
+            if (amount) {
+                let expenseData = await SELECT.one.from(Expenses.drafts).columns("total").where({ ID: ID });
+                let expenseTotal = expenseData.total - parseFloat(amount);
+                req.data.total = expenseTotal;
+                return req.data;
+            }
+        });
+
         this.on("approveTravelRequest", async (req) => {
             const { requestId } = req.data;
             let checkRequestData = await SELECT.one.from(TravelRequests).where({ ID: requestId });
@@ -37,7 +54,16 @@ class EmployeeExpenseService extends cds.ApplicationService {
         });
 
         this.on("rejectTravelRequest", async (req) => {
-            const { requestId } = req.data;
+            const requestID = req.params[0].ID;
+            let checkRequestData = await SELECT.one.from(TravelRequests).where({ ID: requestID });
+
+            if (!checkRequestData) {
+                req.error(404, "Travel request not found");
+            }
+
+            await UPDATE(TravelRequests, requestID).with({ status_travelStatusCode: 'REJECTED' });
+            return "Travel request rejected successfully";
+
         });
 
 

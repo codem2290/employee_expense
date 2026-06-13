@@ -11,7 +11,14 @@ service EmployeeExpenseService {
     @odata.draft.enabled
     entity TravelRequests as projection on dbTables.TravelRequests actions {
         //Bound Action
-        action rejectTravelRequest(requestId: UUID) returns String;
+        @(
+            cds.odata.bindingparameter.name : '_TravelRequest',
+            Common.SideEffects : {
+                TargetEntities : ['_TravelRequest'],
+                TargetProperties : ['TravelRequest/status_travelStatusCode'],
+            },
+        )
+        action rejectTravelRequest() returns String;
     };
     entity Expenses       as projection on dbTables.Expenses;
     entity Approvals      as projection on dbTables.Approvals;
@@ -21,4 +28,6 @@ service EmployeeExpenseService {
     //unbound action
     action approveTravelRequest(requestId: UUID) returns String;
     // action rejectTravelRequest(requestId: UUID) returns String;
+
+    function calculateTotalAmount(expenseId: UUID) returns Decimal(10, 2);
 }
