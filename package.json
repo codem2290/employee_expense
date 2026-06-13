@@ -20,8 +20,27 @@
   "private": true,
   "cds": {
     "requires": {
-      "db": {
-        "kind": "hana"
+      "[development]": {
+        "db": {
+          "kind": "hana"
+        },
+        "auth": {
+          "kind": "mocked",
+          "users": {
+            "employeeTester@tester.sap.com": {
+              "password": "12345",
+              "roles": [
+                "Employees"
+              ]
+            },
+            "managerTester@tester.sap.com": {
+              "password": "12345",
+              "roles": [
+                "Managers"
+              ]
+            }
+          }
+        }
       },
       "[production]": {
         "db": {

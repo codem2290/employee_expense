@@ -133,6 +133,15 @@ resources:
           credential-types:
             - "binding-secret"
             - "x509"
+        role-collections:
+          - name: 'Employees (employee_expense ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.Employees'
+          - name: 'Managers (employee_expense ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.Managers'
   - name: employee_expense-db
     type: com.sap.xs.hdi-container
     parameters:

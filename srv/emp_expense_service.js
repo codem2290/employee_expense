@@ -66,6 +66,19 @@ class EmployeeExpenseService extends cds.ApplicationService {
 
         });
 
+        this.on("callExpenseProcedure", async (req) => {
+            let dbquery = `Call "getExpenseDetails"(APPROVALSTATUS => ?,EXPENSEDATA => ?)`;
+            let data = await cds.run(dbquery);
+
+            if (data) {
+                let result = {
+                    approvalStatusData: data.APPROVALSTATUS,
+                    expenseData: data.EXPENSEDATA
+                };
+                return result;
+            }
+        });
+
 
         // this.on('READ', TravelRequests, async (req) => {
 

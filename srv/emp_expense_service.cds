@@ -9,7 +9,16 @@ service EmployeeExpenseService {
     entity Employees      as projection on dbTables.Employees;
     entity Roles          as projection on dbTables.Roles;
     @odata.draft.enabled
-    entity TravelRequests as projection on dbTables.TravelRequests actions {
+    entity TravelRequests @(restrict: [
+        {
+            grant: 'READ',
+            to: 'Employees'
+        },
+        {
+            grant: '*',
+            to: 'Managers'
+        }
+    ]) as projection on dbTables.TravelRequests actions {
         //Bound Action
         @(
             cds.odata.bindingparameter.name : '_TravelRequest',
@@ -30,4 +39,6 @@ service EmployeeExpenseService {
     // action rejectTravelRequest(requestId: UUID) returns String;
 
     function calculateTotalAmount(expenseId: UUID) returns Decimal(10, 2);
+
+    function callExpenseProcedure() returns String;
 }
