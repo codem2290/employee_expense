@@ -36,6 +36,13 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: employee_expense-db
+        properties:
+          TARGET_CONTAINER: ~{hdi-service-name}
+      - name: reuse_cap_db-db
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: reuse_cap_db-db-hdi
+          service: ~{reuse_cap_db-db-hdi}
 
   - name: employee_expense-app-deployer
     type: com.sap.application.content
@@ -147,6 +154,14 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+    properties:
+      hdi-service-name: ${service-name}
+  - name: reuse_cap_db-db
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: reuse_cap_db-db
+    properties:
+      reuse_cap_db-db-hdi: ${service-name}
   - name: employee_expense-destination
     type: org.cloudfoundry.managed-service
     parameters:

@@ -41,4 +41,6 @@ service EmployeeExpenseService {
     function calculateTotalAmount(expenseId: UUID) returns Decimal(10, 2);
 
     function callExpenseProcedure() returns String;
+
+    entity Managers as projection on dbTables.Managers;
 }

@@ -1,0 +1,8 @@
+{
+    "TRAVEL_MANAGEMENT_MANAGERS": {
+        "target": {
+            "object": "REUSE_DB_MANAGERS",
+            "schema.configure": "reuse_cap_db-db-hdi/schema"
+        }
+    }
+}

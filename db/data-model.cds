@@ -115,3 +115,11 @@ entity ApprovalStatus {
     key statusCode : String;
         statusName : String;
 }
+
+@cds.persistence.exists
+entity Managers {
+    key managerId : Integer;
+        name      : String(100);
+        email     : String(100);
+        phone     : String(20);
+}

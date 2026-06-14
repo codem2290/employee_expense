@@ -1,0 +1,14 @@
+{
+    "reuse_cap_db-db-hdi": {
+        "object_owner": {
+            "container_roles": [
+                "EXTERNAL_MANAGER_ACCESS_G#"
+            ]
+        },
+        "application_user": {
+            "container_roles": [
+                "EXTERNAL_MANAGER_ACCESS"
+            ]
+        }
+    }
+}
